@@ -1,4 +1,8 @@
-const API_BASE = '/api';
+// Use VITE_API_URL from environment if available (production on Netlify/Vercel), else fallback to local /api proxy
+const ENV_API_URL = import.meta.env.VITE_API_URL;
+const API_BASE = ENV_API_URL 
+  ? (ENV_API_URL.endsWith('/') ? `${ENV_API_URL.slice(0, -1)}/api` : (ENV_API_URL.endsWith('/api') ? ENV_API_URL : `${ENV_API_URL}/api`))
+  : '/api';
 
 async function request(endpoint, options = {}) {
   const url = `${API_BASE}${endpoint}`;
