@@ -30,7 +30,10 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Docker volumes / data
-data/
+# Docker volumes / data (but NOT app/data source code)
+/data/
+backend/*.db
+backend/*.sqlite
+backend/*.db-shm
+backend/*.db-wal
 *.sqlite
-*.db
