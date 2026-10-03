@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - LLM_API_KEY=${LLM_API_KEY}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - DATABASE_URL=sqlite:///./fix2runbook.db
+      - ENVIRONMENT=production
+    volumes:
+      - ./backend/fix2runbook.db:/app/fix2runbook.db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
